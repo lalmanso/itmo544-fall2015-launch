@@ -17,9 +17,10 @@ aws elb register-instances-with-load-balancer --load-balancer-name $2 --instance
 
 aws elb configure-health-check --load-balancer-name $2 --health-check Target=HTTP:80/index.html,Interval=30,UnhealthyThreshold=2,HealthyThreshold=2,Timeout=3
 
-aws autoscaling create-launch-configuration --launch-configuration-name itmo-fall2015-launch-config --image-id ami-d05e75b8 --key-name itmo544-fall2015 --security-groups sg-17da1e71 --instance-type t2.micro --user-data file://install-enviroment.sh --iam-instance-profile phpDeveloperRole 
 
-aws autoscaling create-auto-scaling-group --auto-scaling-group-name itmo544-autoscaling-group --launch-configuration-name itmo544-fall2015-launch-config --load-balancer-names $2 --health-check-type ELB --min-size 3 --max-size 6 desired-capacity 3 --defult-cooldown 600 --health-check-grace-period 120 --vpc-zone-identifier subnet-fff4dbd4
+aws autoscaling create-launch-configuration --launch-configuration-name itm-config --image-id ami-d05e75b8 --key-name itmo544-fall2015 --security-groups sg-17da1e71 --instance-type t2.micro --user-data file://install-enviroment.sh --iam-instance-profile phpDeveloperRole 
+
+aws autoscaling create-auto-scaling-group --auto-scaling-group-name itmo544-autoscaling-group --launch-configuration-name itm-config --load-balancer-names $2 --health-check-type ELB --min-size 3 --max-size 6 desired-capacity 3 --defult-cooldown 600 --health-check-grace-period 120 --vpc-zone-identifier subnet-fff4dbd4
 
 
 
