@@ -4,7 +4,7 @@ mapfile -t myInsARRAY < <(aws ec2 run-instances --image-id ami-d05e75b8 --count 
 
 
 
-echo ${myInARRAY[@]}
+echo ${myInsARRAY[@]}
 
 aws ec2 wait instance-running --instance-ids ${myInsARRAY[@]}
 echo "instances are running"
@@ -12,7 +12,7 @@ echo "instances are running"
 ELBURL=(`aws elb create-load-balancer --load-balancer-name $2 --listeners Protocol=HTTP,LoadBalancerPort=80,InstanceProtocol=HTTP,InstancePort=80 --security-groups sg-17da1e71 --subnets subnet-fff4dbd4 --output=text`);
 echo $ELBURL
 
-aws elb register-instances-with-load-balancer --load-balancer-name $2 --instances ${MyInsARRAY[@]}
+aws elb register-instances-with-load-balancer --load-balancer-name $2 --instances ${myInsARRAY[@]}
 
 
 aws elb configure-health-check --load-balancer-name $2 --health-check Target=HTTP:80/index.html,Interval=30,UnhealthyThreshold=2,HealthyThreshold=2,Timeout=3
