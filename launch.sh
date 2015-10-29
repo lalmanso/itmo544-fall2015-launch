@@ -9,7 +9,7 @@ echo ${myInARRAY[@]}
 aws ec2 wait instance-running --instance-ids ${myInsARRAY[@]}
 echo "instances are running"
 
-ELBURL=('aws elb create-load-balancer --load-balancer-name $2 --listeners Protocol=HTTP,LoadBalancerPort=80,InstanceProtocol=HTTP,InstancePort=80 --security-groups sg-17da1e71 --subnets subnet-fff4dbd4 --output=text');
+ELBURL=(`aws elb create-load-balancer --load-balancer-name $2 --listeners Protocol=HTTP,LoadBalancerPort=80,InstanceProtocol=HTTP,InstancePort=80 --security-groups sg-17da1e71 --subnets subnet-fff4dbd4 --output=text`);
 echo $ELBURL
 
 aws elb register-instances-with-load-balancer --load-balancer-name $2 --instances ${MyInsARRAY[@]}
