@@ -1,0 +1,1 @@
+ aws ec2 run-instances --image-id ami-d05e75b8 --count 2 --instance-type t2.micro --key-name itmo544-fall2015 --security-group-ids sg-17da1e71 --subnet-id subnet-fff4dbd4 --associate-public-ip-address
